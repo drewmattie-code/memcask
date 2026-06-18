@@ -22,11 +22,11 @@ def main():
     ctx = Context("demo_agent.dcs")
 
     if len(ctx) == 0:
-        print("First run — starting fresh.")
+        print("First run: starting fresh.")
         ctx.append("user", "Plan a trip to Tokyo.")
         ctx.set("destination", "Tokyo")
     else:
-        print(f"Resuming — {len(ctx)} prior entries, destination = {ctx.get('destination')!r}")
+        print(f"Resuming: {len(ctx)} prior entries, destination = {ctx.get('destination')!r}")
 
     reply = fake_llm(ctx.messages(limit=10))
     ctx.append("assistant", reply)

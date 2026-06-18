@@ -1,4 +1,4 @@
-"""dcs — durable context for AI agents, in one file.
+"""dcs: durable context for AI agents, in one file.
 
 The SQLite of agent memory: a tiny, zero-dependency, tamper-evident store for the
 context an agent needs to survive across sessions, restarts, and machines.
@@ -14,7 +14,7 @@ context an agent needs to survive across sessions, restarts, and machines.
     ctx = Context("agent.dcs")
     ctx.messages(limit=20)              # resume: recent log as LLM messages
     ctx.get("pref.seat")               # "aisle"
-    ctx.verify()                        # True — hash chain intact
+    ctx.verify()                        # True: hash chain intact
 
 One file on disk. Standard library only. MIT licensed.
 """
@@ -58,9 +58,9 @@ class Context:
 
     Two surfaces:
 
-    * an **append-only log** (the durable record of what happened) — ``append``,
+    * an **append-only log** (the durable record of what happened): ``append``,
       ``history``, ``messages``, iteration, ``len``;
-    * **key/value state** (facts the agent keeps and updates) — ``set``, ``get``,
+    * **key/value state** (facts the agent keeps and updates): ``set``, ``get``,
       ``state``, ``delete``.
 
     Every log entry is hash-chained to the one before it, so ``verify()`` can
