@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dcs"
+version = "0.1.0"
+description = "Durable, tamper-evident context for AI agents in one file. Zero dependencies."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Drew Mattie" }]
+keywords = ["ai", "agents", "memory", "context", "sqlite", "llm", "durable", "state"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.urls]
+Homepage = "https://github.com/drewmattie-code/Durable-Context-Spine"
+Spec = "https://github.com/drewmattie-code/Durable-Context-Spine"
+
+[tool.setuptools]
+py-modules = ["dcs"]
