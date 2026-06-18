@@ -42,15 +42,11 @@ There's no small, neutral, *boring* primitive for "durable agent context." `memc
 
 ## Install
 
-It's a single file with zero dependencies, so the simplest install is to **copy `memcask.py` into your project**.
-
-Or, once it's on PyPI:
-
 ```bash
 pip install memcask
 ```
 
-> Note: the PyPI publish is pending; for now, copy the one file.
+Or, since it's a single file with zero dependencies, just **copy `memcask.py` into your project**.
 
 ## API
 

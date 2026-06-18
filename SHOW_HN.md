@@ -41,4 +41,4 @@ Feedback very welcome, especially on the on-disk format and the integrity model.
 - First comment (pin): paste the 6-line quickstart + the "why not Mem0/Zep" paragraph.
 - Reply to every comment fast for the first 2-3 hours; engagement drives ranking.
 - Cross-post after HN: LinkedIn (résumé/Spine framing), X thread, r/LocalLLaMA, r/AI_Agents.
-- Pre-flight: the PyPI name "memcask" is confirmed available; reserve it with the first publish.
+- Live on PyPI: pip install memcask (published 2026-06-18).
