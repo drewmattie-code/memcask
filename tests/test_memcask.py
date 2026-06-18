@@ -1,4 +1,4 @@
-"""Tests for dcs: zero dependencies, stdlib unittest.
+"""Tests for memcask: zero dependencies, stdlib unittest.
 
 Run from the repo root:  python -m unittest discover -s tests
 """
@@ -10,14 +10,14 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import dcs  # noqa: E402
-from dcs import Context, IntegrityError  # noqa: E402
+import memcask  # noqa: E402
+from memcask import Context, IntegrityError  # noqa: E402
 
 
-class DcsTest(unittest.TestCase):
+class MemcaskTest(unittest.TestCase):
     def setUp(self):
         self.dir = tempfile.mkdtemp()
-        self.path = os.path.join(self.dir, "t.dcs")
+        self.path = os.path.join(self.dir, "t.cask")
 
     def ctx(self):
         return Context(self.path)
@@ -138,7 +138,7 @@ class DcsTest(unittest.TestCase):
         c.close()
 
     def test_version(self):
-        self.assertTrue(dcs.__version__)
+        self.assertTrue(memcask.__version__)
 
 
 if __name__ == "__main__":

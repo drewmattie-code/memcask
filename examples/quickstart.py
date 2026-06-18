@@ -10,7 +10,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from dcs import Context  # noqa: E402
+from memcask import Context  # noqa: E402
 
 
 def fake_llm(messages):
@@ -19,7 +19,7 @@ def fake_llm(messages):
 
 
 def main():
-    ctx = Context("demo_agent.dcs")
+    ctx = Context("demo_agent.cask")
 
     if len(ctx) == 0:
         print("First run: starting fresh.")

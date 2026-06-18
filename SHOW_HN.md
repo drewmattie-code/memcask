@@ -1,7 +1,7 @@
 # Launch draft: Show HN
 
 **Title (≤80 chars, no "I built"):**
-Show HN: dcs, durable and tamper-evident context for AI agents in one file
+Show HN: memcask, durable and tamper-evident context for AI agents in one file
 
 **Body:**
 
@@ -10,7 +10,7 @@ the agent knows across sessions and restarts. The choices were always ad-hoc
 JSON I forgot to save, or a heavy hosted memory service that wanted an account
 and a stack.
 
-So I wrote dcs, a tiny, zero-dependency Python library that keeps an agent's
+So I wrote memcask, a tiny, zero-dependency Python library that keeps an agent's
 durable context in a single SQLite file:
 
 - append-only log + key/value state (the record of what happened, plus the
@@ -30,7 +30,7 @@ agents need durable, trustworthy context before they need semantic recall.
 It's the reference implementation of a small spec I've been writing on agent
 state (the Durable Context Spine).
 
-Repo: <REPO_URL> · MIT.
+Repo: https://github.com/drewmattie-code/memcask · MIT.
 
 Feedback very welcome, especially on the on-disk format and the integrity model.
 
@@ -41,4 +41,4 @@ Feedback very welcome, especially on the on-disk format and the integrity model.
 - First comment (pin): paste the 6-line quickstart + the "why not Mem0/Zep" paragraph.
 - Reply to every comment fast for the first 2-3 hours; engagement drives ranking.
 - Cross-post after HN: LinkedIn (résumé/Spine framing), X thread, r/LocalLLaMA, r/AI_Agents.
-- Pre-flight: confirm the PyPI distribution name (plain "dcs" may be taken, have a fallback), and decide the final public NAME (working name is "dcs").
+- Pre-flight: the PyPI name "memcask" is confirmed available; reserve it with the first publish.

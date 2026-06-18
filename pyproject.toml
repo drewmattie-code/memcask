@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "dcs"
+name = "memcask"
 version = "0.1.0"
 description = "Durable, tamper-evident context for AI agents in one file. Zero dependencies."
 readme = "README.md"
@@ -21,8 +21,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/drewmattie-code/Durable-Context-Spine"
+Homepage = "https://github.com/drewmattie-code/memcask"
 Spec = "https://github.com/drewmattie-code/Durable-Context-Spine"
 
 [tool.setuptools]
-py-modules = ["dcs"]
+py-modules = ["memcask"]

@@ -1,17 +1,17 @@
-"""dcs: durable context for AI agents, in one file.
+"""memcask: durable context for AI agents, in one file.
 
 The SQLite of agent memory: a tiny, zero-dependency, tamper-evident store for the
 context an agent needs to survive across sessions, restarts, and machines.
 
-    from dcs import Context
+    from memcask import Context
 
-    ctx = Context("agent.dcs")          # open or create one portable file
+    ctx = Context("agent.cask")          # open or create one portable file
     ctx.append("user", "Book me a flight to NYC")
     ctx.append("assistant", "Searching flights...")
     ctx.set("pref.seat", "aisle")       # durable key/value state
 
     # ...new process, days later...
-    ctx = Context("agent.dcs")
+    ctx = Context("agent.cask")
     ctx.messages(limit=20)              # resume: recent log as LLM messages
     ctx.get("pref.seat")               # "aisle"
     ctx.verify()                        # True: hash chain intact
@@ -67,7 +67,7 @@ class Context:
     detect any silent corruption or tampering.
     """
 
-    def __init__(self, path: str = "context.dcs"):
+    def __init__(self, path: str = "context.cask"):
         self.path = path
         self._db = sqlite3.connect(path, isolation_level=None)  # autocommit; append() uses an explicit IMMEDIATE txn
         self._db.execute("PRAGMA journal_mode=WAL")
