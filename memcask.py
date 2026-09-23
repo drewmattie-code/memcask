@@ -145,7 +145,9 @@ class Context:
         q += " ORDER BY seq ASC"
         rows = self._db.execute(q, args).fetchall()
         if limit is not None:
-            rows = rows[-limit:]
+            if limit < 0:
+                raise ValueError("limit must be >= 0")
+            rows = rows[-limit:] if limit else []  # rows[-0:] would return everything
         return [{"seq": s, "ts": t, "role": r, "content": json.loads(c)} for (s, t, r, c) in rows]
 
     def messages(self, limit: Optional[int] = None, roles: Optional[list[str]] = None) -> list[dict]:
@@ -188,7 +190,9 @@ class Context:
     # -- integrity -------------------------------------------------------------
     def verify(self, raise_on_fail: bool = False) -> bool:
         """Walk the hash chain. Returns True if intact; False (or raises
-        ``IntegrityError``) if any entry was altered, reordered, or dropped."""
+        ``IntegrityError``) if any entry was altered, reordered, or dropped
+        from the middle. Dropping the newest entries leaves a valid (shorter)
+        chain; detect that by comparing ``head()`` to a copy pinned elsewhere."""
         prev = GENESIS_HASH
         for (seq, ts, role, cj, prev_hash, h) in self._db.execute(
             "SELECT seq,ts,role,content,prev_hash,hash FROM log ORDER BY seq ASC"

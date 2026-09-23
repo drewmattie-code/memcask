@@ -35,7 +35,7 @@ There's no small, neutral, *boring* primitive for "durable agent context." `memc
 - **Zero dependencies.** Pure Python standard library (`sqlite3`, `json`, `hashlib`). Nothing to install but the file.
 - **One portable file.** A `.cask` file *is* a SQLite database. Move it, commit it, ship it, inspect it with any SQLite tool.
 - **Append-only log + key/value state.** The durable record of what happened, plus the facts your agent keeps.
-- **Tamper-evident.** Every entry is SHA-256 hash-chained to the previous one. `verify()` catches any altered, reordered, or dropped entry.
+- **Tamper-evident.** Every entry is SHA-256 hash-chained to the previous one. `verify()` catches any altered, reordered, or dropped historical entry (see [Integrity model](#integrity-model) for the newest-entries caveat).
 - **Resume is just reopening the file.** No special "load" ceremony.
 - **LLM-ready.** `messages()` hands you `[{"role", "content"}]` straight into a model call.
 - **Tiny.** ~150 lines you can read in one sitting.
@@ -88,7 +88,7 @@ Those are good, *bigger* tools: semantic memory, vector recall, hosted services,
 
 ## Integrity model
 
-`memcask` is **tamper-evident**, not tamper-proof. Each entry's hash commits to the previous entry's hash, so any in-place edit, reordering, or deletion of a historical entry makes `verify()` return `False`. What it does *not* do on its own: stop someone with write access from rewriting the whole chain from scratch. Like any unanchored hash chain, catching that requires pinning a known-good head somewhere external (sign it, or store the latest `head()` elsewhere).
+`memcask` is **tamper-evident**, not tamper-proof. Each entry's hash commits to the previous entry's hash, so any in-place edit, reordering, or deletion of a historical entry makes `verify()` return `False`. Deleting the newest entries is different: what remains is still a valid chain, so truncation is only caught by comparing `head()` against a copy you pinned earlier. What it does *not* do on its own: stop someone with write access from rewriting the whole chain from scratch. Like any unanchored hash chain, catching that requires pinning a known-good head somewhere external (sign it, or store the latest `head()` elsewhere).
 
 It is also **not** an encryption layer: a `.cask` file is plaintext SQLite, readable by anyone who has it. Treat it like any data file: don't put secrets in it unless the file itself is protected.
 
