@@ -42,6 +42,17 @@ class MemcaskTest(unittest.TestCase):
         self.assertEqual([h["content"] for h in c.history(role="user")], ["m0", "m2", "m4"])
         c.close()
 
+    def test_limit_zero_and_negative(self):
+        c = self.ctx()
+        for i in range(3):
+            c.append("user", f"m{i}")
+        self.assertEqual(c.history(limit=0), [])
+        self.assertEqual(c.messages(limit=0), [])
+        self.assertEqual(len(c.history(limit=10)), 3)
+        with self.assertRaises(ValueError):
+            c.history(limit=-1)
+        c.close()
+
     def test_structured_content_roundtrips(self):
         c = self.ctx()
         payload = {"flights": [{"to": "NYC", "price": 412}], "ok": True}
